@@ -78,4 +78,5 @@
 
 .controlButton {
     background-color: #cccccc;
+    flex-grow: 1;
 }
