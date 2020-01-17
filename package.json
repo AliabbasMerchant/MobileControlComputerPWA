@@ -1,0 +1,22 @@
+{
+  "name": "mobile-controls-computer-pwa",
+  "version": "1.0.0",
+  "description": "Control your computer using your mobile",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AliabbasMerchant/MobileControlComputerPWA.git"
+  },
+  "author": "Aliabbas Merchant",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AliabbasMerchant/MobileControlComputerPWA/issues"
+  },
+  "homepage": "https://github.com/AliabbasMerchant/MobileControlComputerPWA#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
