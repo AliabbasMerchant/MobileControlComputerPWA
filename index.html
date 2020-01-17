@@ -40,8 +40,45 @@
                     </div>
                     <button id="connectButton" class="btn btn-outline-dark pl-4 pr-4">Connect</button>
                 </div>
-                <div id="controller">
-                    HIDDEN
+                <div id="controller" style="display: none;">
+                    <div id="controllerTabs" style="margin: 0;padding: 0;">
+                        <ul>
+                            <li><a href="#tab-1">Common</a></li>
+                            <li><a href="#tab-2">Mouse</a></li>
+                            <li><a href="#tab-3">Keyboard</a></li>
+                        </ul>
+                        <div id="tab-1">
+                            <!-- u,d,l,r,space,enter,escape -->
+                            <!-- pgup,pgdn,home,end -->
+                            <div class="container container-fluid">
+                                <div class="row mb-2">
+                                    <div class="controlButton col-12" data-signal="escape">escape</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4"></div>
+                                    <div class="controlButton col-4" data-signal="up">&#8593;</div>
+                                    <div class="col-4"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="controlButton col-4" data-signal="left">&#8592;</div>
+                                    <div class="controlButton col-4" data-signal="down">&#8595;</div>
+                                    <div class="controlButton col-4" data-signal="right">&#8594;</div>
+                                </div>
+                                <div class="row my-2">
+                                    <div class="controlButton col-12" data-signal="space">space</div>
+                                </div>
+                                <div class="row">
+                                    <div class="controlButton col-12" data-signal="enter">enter</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-2">
+                            <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
+                        </div>
+                        <div id="tab-3">
+                            <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-1 col-lg-2 col-xl-3"></div>
@@ -52,11 +89,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-    <!-- jQuery UI
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
         integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css" /> -->
+        href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css" />
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
     <script src="/scripts/app.js"></script>
