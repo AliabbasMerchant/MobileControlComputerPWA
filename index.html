@@ -27,12 +27,27 @@
         <div class="row">
             <div class="col-md-1 col-lg-2 col-xl-3"></div>
             <div class="col-md-10 col-lg-8 col-xl-6">
-                CONTENT
+                <div id="connector">
+                    <div class="heading-2 text-center mt-3">CONNECT</div>
+                    <div class="form-group">
+                        <label for="secret">Connection Secret</label>
+                        <input type="text" class="form-control" id="secretText" name="secret" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="required" for="connect">Connect To</label>
+                        <input type="text" class="form-control" id="connectInput" placeholder="Enter URL" name="connect"
+                            required>
+                    </div>
+                    <button id="connectButton" class="btn btn-outline-dark pl-4 pr-4">Connect</button>
+                </div>
+                <div id="controller">
+                    HIDDEN
+                </div>
             </div>
             <div class="col-md-1 col-lg-2 col-xl-3"></div>
         </div>
     </div>
-    
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
