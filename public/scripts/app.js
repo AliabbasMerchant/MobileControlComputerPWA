@@ -45,6 +45,10 @@ $(() => {
                 send('delete', 'type')
             }
         };
+        $(".mouseButton").click((e) => {
+            let signal = $(e.target).data('signal');
+            send(signal, 'click');
+        });
     }
 
     $("#connectButton").click(() => {
