@@ -80,3 +80,8 @@
     background-color: #cccccc;
     flex-grow: 1;
 }
+
+#trackpad {
+    border: 1px solid black;
+    background-color: ghostwhite;
+}

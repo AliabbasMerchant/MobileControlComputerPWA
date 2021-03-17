@@ -2,38 +2,53 @@ const testing = true;
 let URL;
 
 $(() => {
+    const connectionSecret = testing ? "abcde" : Array(5).fill(0).map(_x => Math.random().toString(36).charAt(2)).join('');
+    document.getElementById("secretText").value = connectionSecret;
+    
+    function send(signal, action) {
+        console.log(signal, action)
+        $.post(`${URL}/control`, { connectionSecret, signal, action })
+        .done((data) => {
+            data = JSON.parse(data)
+            if (!data.ok) {
+                console.log(`Error: Signal=${signal}, Msg=${data.msg}`)
+            }
+        }).fail((err) => {
+            console.log("err", err);
+        });
+    }
+    function trackpadEventHandler(event) {
+        var trackpad = $('#trackpad')
+        var offset = trackpad.offset();
+        var x = Math.round(event.touches[0].pageX - offset.left);
+        var y = Math.round(event.touches[0].pageY - offset.top);
+        console.log(event.touches[0].pageX, offset.left, x, y, event.touches[0].pageY, offset.top)
+        send(JSON.stringify({x, y, w: trackpad[0].offsetWidth, h:trackpad[0].offsetHeight }), 'mouse')
+    }
+    
     function controller() {
         $("#controllerTabs").tabs();
         $(".controlButton").click((e) => {
             let signal = $(e.target).data('signal');
-            $.post(`${URL}/control`, { connectionSecret, signal })
-                .done((data) => {
-                    data = JSON.parse(data)
-                    if (!data.ok) {
-                        console.log(`Error: Signal=${signal}, Msg=${data.msg}`)
-                    }
-                }).fail((err) => {
-                    console.log("err", err);
-                });
+            send(signal, 'type');
         });
-        document.getElementById("trackpad").ontouchmove = (event) => {
-            var x = event.touches[0].clientX;
-            var y = event.touches[0].clientY;
-            console.log(x, y)
-        };
-        document.getElementById("trackpad").ontouchstart = (event) => {
-            console.log("start")
-        };
-        document.getElementById("trackpad").ontouchend = (event) => {
-            console.log("end")
+        document.getElementById("trackpad").ontouchmove = trackpadEventHandler;
+        document.getElementById("trackpad").ontouchstart = trackpadEventHandler;
+        document.getElementById("textarea").oninput = (event) => {
+            var inputType = event.inputType;
+            if(inputType == "insertText") {
+                var data = event.data;
+                send(data, 'type')
+            } else if(inputType == "deleteContentBackward") {
+                send('backspace', 'type')
+            } else if(inputType == "deleteContentForward") {
+                send('delete', 'type')
+            }
         };
     }
 
-    const connectionSecret = testing ? "abcde" : Array(5).fill(0).map(_x => Math.random().toString(36).charAt(2)).join('');
-    document.getElementById("secretText").value = connectionSecret;
     $("#connectButton").click(() => {
-        // URL = testing ? "http://127.0.0.1:3124" : document.getElementById("connectInput").value;
-        URL = testing ? "http://192.168.43.199:3124" : document.getElementById("connectInput").value;
+        URL = testing ? "http://127.0.0.1:3124" : document.getElementById("connectInput").value;
         $.post(`${URL}/connect`, { connectionSecret })
             .done((data) => {
                 data = JSON.parse(data)
