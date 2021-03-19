@@ -46,6 +46,7 @@
                             <li><a href="#tab-1">Common</a></li>
                             <li><a href="#tab-2">Mouse</a></li>
                             <li><a href="#tab-3">Keyboard</a></li>
+                            <li><a href="#tab-4">Screen Share</a></li>
                         </ul>
                         <div id="tab-1">
                             <div class="row mb-2">
@@ -80,10 +81,18 @@
                         <div id="tab-3">
                             <textarea id="textarea" name="text" rows="4" cols="50"></textarea>
                         </div>
+                        <div id="tab-4">
+                            <button id="startButton" class="btn btn-outline-dark pl-4 pr-4">Start</button>
+                            <button id="endButton" class="btn btn-outline-dark pl-4 pr-4">End</button>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-1 col-lg-2 col-xl-3"></div>
+        </div>
+        <br>
+        <div class="row">
+            <img src="" alt="" id="image">
         </div>
     </div>
 
@@ -97,6 +106,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css" />
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <script src="/scripts/app.js"></script>
 </body>
 

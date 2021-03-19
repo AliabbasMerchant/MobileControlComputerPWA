@@ -101,3 +101,12 @@
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
+
+#image {
+    display: block;
+    max-width:1330px;
+    max-height:350px;
+    width: auto;
+    height: auto;
+    margin: auto;
+}
