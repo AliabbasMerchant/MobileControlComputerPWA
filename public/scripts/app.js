@@ -7,7 +7,7 @@ $(() => {
     document.getElementById("secretText").value = connectionSecret;
     
     function send(signal, action) {
-        console.log(signal, action)
+        console.log("Sending signal and action:", signal, action)
         $.post(`${URL}/control`, { connectionSecret, signal, action })
         .done((data) => {
             data = JSON.parse(data)
@@ -19,12 +19,20 @@ $(() => {
         });
     }
 
-    function trackpadEventHandler(event) {
+    function trackpadClickEventHandler(event) {
+        trackpadEventHandler(event.pageX, event.pageY);
+    }
+
+    function trackpadTouchEventHandler(event) {
+        trackpadEventHandler(event.touches[0].pageX, event.touches[0].pageY);
+    }
+
+    function trackpadEventHandler(X, Y) {
         var trackpad = $('#trackpad')
         var offset = trackpad.offset();
-        var x = Math.round(event.touches[0].pageX - offset.left);
-        var y = Math.round(event.touches[0].pageY - offset.top);
-        console.log(event.touches[0].pageX, offset.left, x, y, event.touches[0].pageY, offset.top)
+        var x = Math.round(X - offset.left);
+        var y = Math.round(Y - offset.top);
+        console.log(X, offset.left, x, y, Y, offset.top)
         send(JSON.stringify({x, y, w: trackpad[0].offsetWidth, h:trackpad[0].offsetHeight }), 'mouse')
     }
     
@@ -35,8 +43,9 @@ $(() => {
             send(signal, 'type');
         });
 
-        document.getElementById("trackpad").ontouchmove = trackpadEventHandler;
-        document.getElementById("trackpad").ontouchstart = trackpadEventHandler;
+        document.getElementById("trackpad").onclick = trackpadClickEventHandler;
+        document.getElementById("trackpad").ontouchmove = trackpadTouchEventHandler;
+        document.getElementById("trackpad").ontouchstart = trackpadTouchEventHandler;
         document.getElementById("textarea").oninput = (event) => {
             var inputType = event.inputType;
             if(inputType == "insertText") {
