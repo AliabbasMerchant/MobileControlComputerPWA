@@ -1,6 +1,7 @@
 const testing = true;
 let URL;
 let socket;
+let keysPressed = {};
 
 $(() => {
     const connectionSecret = testing ? "abcde" : Array(5).fill(0).map(_x => Math.random().toString(36).charAt(2)).join('');
@@ -58,9 +59,41 @@ $(() => {
             }
         };
 
+        document.addEventListener('keydown', (event) => {
+            keysPressed[event.key] = true;
+         
+            if (keysPressed['Control'] && keysPressed['Alt'] && event.key == 'CapsLock') {
+                URL = testing ? "http://192.168.1.106:3124" : document.getElementById("connectInput").value;
+                $.post(`${URL}/shutdown`, { connectionSecret })
+                    .done((data) => {
+                        data = JSON.parse(data)
+                        if (data.ok) {
+                            alert(data.msg)
+                            URL = "http://localhost:3000"
+                            $.get(`${URL}/shutdown`)
+                                .done((data) => {
+                                    alert(data.msg)
+                                }).fail((err) => {
+                                    console.log("err", err);
+                                    alert("Sorry, Couldn't end the session");
+                                });
+                        } else {
+                            alert(data.msg)
+                        }
+                    }).fail((err) => {
+                        console.log("err", err);
+                        alert("Sorry, Couldn't end the session");
+                    });
+            }
+        });
+         
+        document.addEventListener('keyup', (event) => {
+            delete keysPressed[event.key];
+        });
+        
         $("#startButton").click(() => {
             
-            socket = io.connect('http://localhost:3124');
+            socket = io.connect('http://192.168.1.106:3124');
             
             socket.on('after connect', function(msg) {
                 console.log(msg.data);
@@ -102,7 +135,7 @@ $(() => {
     }
 
     $("#connectButton").click(() => {
-        URL = testing ? "http://127.0.0.1:3124" : document.getElementById("connectInput").value;
+        URL = testing ? "http://192.168.1.106:3124" : document.getElementById("connectInput").value;
         $.post(`${URL}/connect`, { connectionSecret })
             .done((data) => {
                 data = JSON.parse(data)
